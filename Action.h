@@ -1,21 +1,10 @@
 #pragma once
-#include "SFML/Graphics.hpp"
+#include "Entity.h"
 
-namespace gobj 
+class Action
 {
-	class GameObject;
-}
-
-namespace action
-{
-	class Action
-	{
-	public:
-		virtual void execute(double delta) = 0;
-		virtual ~Action();
-	protected:
-		Action(gobj::GameObject * go);
-		gobj::GameObject* go = nullptr;
-	};
-}
-#include "GameObject.h"
+public:
+	virtual void execute(Entity& entity) = 0;
+	//virtual void undo(gameobject::GameObject& go) = 0;
+	virtual ~Action();
+};

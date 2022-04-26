@@ -1,14 +1,15 @@
 #pragma once
 #include "Action.h"
-
-namespace action
+#include "Movable.h"
+#include "raylib.h"
+class MoveAction : public Action
 {
-	class MoveAction : public Action
-	{
-	public:
-		MoveAction(gobj::GameObject* go, double speed);
-		virtual void execute(double dt) override;
-	private:
-		double speed;
-	};
-}
+public:
+	MoveAction(Vector2 dir, float speed);
+	void setDir(Vector2 dir);
+	void setSpeed(float speed);
+	virtual void execute(Entity& entity) override;
+private:
+	Vector2 dir;
+	float speed;
+};

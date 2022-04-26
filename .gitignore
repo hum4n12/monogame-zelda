@@ -1,4 +1,7 @@
-SFML.vcxproj
-SFML.vcxproj.filters
-SFML.vcxproj.user
+Debug
 x64
+/raylib-zelda.vcxproj
+/raylib-zelda.vcxproj.filters
+/raylib-zelda.vcxproj.user
+/raylib.dll
+/raylib.lib

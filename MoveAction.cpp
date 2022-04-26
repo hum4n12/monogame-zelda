@@ -1,26 +1,24 @@
 #include "MoveAction.h"
-#include <iostream>
-using namespace action;
+#include "Movable.h"
+#include <math.h>
 
-MoveAction::MoveAction(gobj::GameObject* go,double speed): speed(speed),Action(go)
+MoveAction::MoveAction(Vector2 dir, float speed)
 {
-	std::cout << "created\n";
+	this->dir = dir;
+	this->speed = speed;
 }
 
-void MoveAction::execute(double dt)
+void MoveAction::setDir(Vector2 dir)
 {
-	sf::Vector2f direction = this->go->getDirection();
+	this->dir = dir;
+}
 
-	if (direction.x == 0 && direction.y == 0) return;
-	sf::Vector2f newPos;
-	double length = sqrt(direction.x * direction.x + direction.y * direction.y);
-	
-	newPos.x = direction.x / length;
-	newPos.y = direction.y / length;
+void MoveAction::setSpeed(float speed)
+{
+	this->speed = speed;
+}
 
-	newPos.x *= this->speed * dt;
-	newPos.y *= this->speed * dt;
-
-	newPos += go->getPosition();
-	go->setPosition(newPos);
+void MoveAction::execute(Entity& entity)
+{
+	//(Movable*)entity.move();
 }

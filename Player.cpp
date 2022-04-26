@@ -1,70 +1,46 @@
 #include "Player.h"
+#include "MoveAction.h"
 #include <iostream>
 
-using namespace gobj;
-
-action::Action* gobj::Player::update(double delta)
+void Player::update()
 {
-	return this->currentAction; 
+	//EXAMPLE, NEED TO EXCLUDE IT TO KEYBOARD HANDLER
+	Action* action = nullptr;
+	if (IsKeyDown(KEY_W) || IsKeyDown(KEY_A) || IsKeyDown(KEY_S) || IsKeyDown(KEY_D))
+	{
+		if (IsKeyDown(KEY_W))
+		{
+			this->direction.y = -1;
+		}
+		
+		if (IsKeyDown(KEY_A))
+		{
+			this->direction.x = -1;
+		}
+
+		if (IsKeyDown(KEY_S))
+		{
+			this->direction.y = 1;
+		}
+
+		if (IsKeyDown(KEY_D))
+		{
+			this->direction.x = 1;
+		}
+
+		//action = new MoveAction(this->direction,this->speed);
+	}
+
+	this->move();
+
+	if (action != nullptr)
+	{
+		action->execute(*this);
+		delete action;
+	}
 }
 
-void gobj::Player::handleKeyboard(sf::Event* e)
+void Player::move()
 {
-	if (e->type == sf::Event::KeyPressed)
-	{	
-		if (e->key.code == sf::Keyboard::D)
-		{
-			this->dir.x = 1;
-		}
-
-		if (e->key.code == sf::Keyboard::A)
-		{
-			this->dir.x = -1;
-		}
-
-		if (e->key.code == sf::Keyboard::W)
-		{
-			this->dir.y = -1;
-		}
-
-		if (e->key.code == sf::Keyboard::S)
-		{
-			this->dir.y = 1;
-		}
-		if(this->currentAction == nullptr)
-			this->currentAction = new action::MoveAction(this, this->speed);
-	}
-
-	else if (e->type == sf::Event::KeyReleased)
-	{
-		if (e->key.code == sf::Keyboard::D)
-		{
-			if(this->dir.x > 0)
-				this->dir.x = 0;
-		}
-
-		if (e->key.code == sf::Keyboard::A)
-		{
-			if (this->dir.x < 0)
-				this->dir.x = 0;
-		}
-
-		if (e->key.code == sf::Keyboard::W)
-		{
-			if (this->dir.y < 0)
-				this->dir.y = 0;
-		}
-
-		if (e->key.code == sf::Keyboard::S)
-		{
-			if (this->dir.y > 0)
-				this->dir.y = 0;
-		}
-
-		if (this->dir.x == 0 && this->dir.y == 0)
-		{
-			delete this->currentAction;
-			this->currentAction = nullptr;
-		}
-	}
+	this->setPosition(this->basicMove(this->getPosition(), this->speed));
 }

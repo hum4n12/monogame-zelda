@@ -1,58 +1,47 @@
 #include "GameController.h"
 #include <iostream>
-using namespace gc;
+#include "raylib.h"
+#include "Rectangle.h"
 
-
-GameController::GameController(sf::RenderWindow* window) : window(window)
+GameController::GameController()
 {
 
 }
 
-void GameController::events()
-{
-	sf::Event event;
-	while (this->window->pollEvent(event))
-	{
-		if (event.type == sf::Event::Closed)
-		{
-			this->window->close();
-		}
-
-		if (this->player != nullptr)
-		{
-			this->player->handleKeyboard(&event);
-		}
-	}
-}
+//action::Action GameController::events()
+//{
+//	
+//}
 
 void GameController::init()
 {
-	this->player = new gobj::Player({ 200,200 }, new sf::RectangleShape({ 50,50 }));
-	this->player->getShape()->setFillColor(sf::Color::Red);
-	this->shape = new sf::CircleShape(100.0f);
-	this->shape->setFillColor(sf::Color::Green);
+	this->player = new Player(new shape::Rectangle(50, 50, { 200, 200 }));
+	this->actors.push_back(player);
 }
 
-void GameController::update(double delta)
+void GameController::update()
 {
-	this->events();
-	action::Action* action = this->player->update(delta);
-	if (action != nullptr) {
-		action->execute(delta);
+	for (auto& actor : this->actors)
+	{
+		actor->update();
 	}
-	
+
 }
 
 void GameController::draw()
 {
-	this->window->clear();
-	this->window->draw(*this->shape);
-	this->player->draw(this->window);
-	window->display();
+	BeginDrawing();
+	ClearBackground(RAYWHITE);
+
+	for (auto& actor : this->actors)
+	{
+		actor->draw();
+	}
+
+	EndDrawing();
 }
 
 void GameController::clear()
 {
-	delete this->shape;
 	delete this->player;
 }

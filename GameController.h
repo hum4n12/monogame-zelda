@@ -1,25 +1,17 @@
 #pragma once
-#include <memory>
-#include "SFML/Graphics.hpp"
 #include "Player.h"
+#include <vector>
 
-namespace gc
+class GameController
 {
-
-	class GameController
-	{
-	public:
-		GameController(sf::RenderWindow* window);
-		void init();
-		void update(double delta);
-		void draw();
-		void clear();
-	private:
-		gobj::Player* player;
-		sf::RenderWindow* window = nullptr;
-		sf::CircleShape* shape = nullptr;
-		void events();
-	};
-
-
-}
+public:
+	GameController();
+	void init();
+	void update();
+	void draw();
+	void clear();
+private:
+	Player* player;
+	std::vector<Actor*> actors; //interactive entities
+	//Action events();
+};
