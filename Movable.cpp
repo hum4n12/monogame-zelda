@@ -24,5 +24,16 @@ Vector2 Movable::basicMove(Vector2 position, float speed)
 
 	direction.x = 0;
 	direction.y = 0;
+
 	return newPosition;
+}
+
+void Movable::setDirection(Vector2 direction)
+{
+	this->direction = direction;
+}
+
+float Movable::getSpeed()
+{
+	return this->speed;
 }

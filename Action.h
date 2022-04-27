@@ -4,7 +4,8 @@
 class Action
 {
 public:
-	virtual void execute(Entity& entity) = 0;
+	Action();
+	virtual void execute() = 0;
 	//virtual void undo(gameobject::GameObject& go) = 0;
 	virtual ~Action();
 };

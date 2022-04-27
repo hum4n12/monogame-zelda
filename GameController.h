@@ -1,5 +1,6 @@
 #pragma once
 #include "Player.h"
+#include "KeyboardHandler.h"
 #include <vector>
 
 class GameController
@@ -12,6 +13,7 @@ public:
 	void clear();
 private:
 	Player* player;
+	KeyboardHandler* keyboardHandler;
 	std::vector<Actor*> actors; //interactive entities
 	//Action events();
 };

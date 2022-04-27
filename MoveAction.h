@@ -5,11 +5,12 @@
 class MoveAction : public Action
 {
 public:
-	MoveAction(Vector2 dir, float speed);
-	void setDir(Vector2 dir);
+	MoveAction(Movable* movable);
+	void setDirection(Vector2 direction);
 	void setSpeed(float speed);
-	virtual void execute(Entity& entity) override;
+	virtual void execute() override;
 private:
-	Vector2 dir;
+	Vector2 direction;
 	float speed;
+	Movable* movable;
 };

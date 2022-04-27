@@ -2,15 +2,14 @@
 #include "Movable.h"
 #include <math.h>
 
-MoveAction::MoveAction(Vector2 dir, float speed)
+MoveAction::MoveAction(Movable* movable)
 {
-	this->dir = dir;
-	this->speed = speed;
+	this->movable = movable;
 }
 
-void MoveAction::setDir(Vector2 dir)
+void MoveAction::setDirection(Vector2 direction)
 {
-	this->dir = dir;
+	this->direction = direction;
 }
 
 void MoveAction::setSpeed(float speed)
@@ -18,7 +17,7 @@ void MoveAction::setSpeed(float speed)
 	this->speed = speed;
 }
 
-void MoveAction::execute(Entity& entity)
+void MoveAction::execute()
 {
-	//(Movable*)entity.move();
+	this->movable->move();
 }
