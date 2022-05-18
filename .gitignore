@@ -1,7 +1,8 @@
-Debug
-x64
-/raylib-zelda.vcxproj
-/raylib-zelda.vcxproj.filters
-/raylib-zelda.vcxproj.user
-/raylib.dll
-/raylib.lib
+bin
+obj
+app.manifest
+Icon.bmp
+Icon.ico
+monogame-zelda.csproj
+monogame-zelda.csproj.user
+Content
